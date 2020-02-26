@@ -11,7 +11,8 @@ class AuthService {
     return user != null ? User(uid: user.uid) : null;
   }
 
-  // auth change user stream
+  // auth change user stream.
+  // Returns user if user logs or null if user logs out.
   Stream<User> get user {
      return _auth.onAuthStateChanged.
      map(
