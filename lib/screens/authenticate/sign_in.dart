@@ -47,14 +47,17 @@ class _SignInState extends State<SignIn> {
             ),
             SizedBox(height: 20.0),
             TextFormField(
+              validator: (val) => val.length < 6 ? "Enter a passowrd 6+ chars long" : null,
               obscureText: true,
               onChanged: (val) => password = val,
             ),
             SizedBox(height:20.0),
             RaisedButton(
               onPressed: () async {
-                print(email);
-                print(password);
+
+                  print(email);
+                  print(password);
+
               },
               color: Colors.pink[400],
               child: Text(
