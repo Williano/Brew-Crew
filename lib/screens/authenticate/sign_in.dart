@@ -14,9 +14,12 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String email = "";
   String password = "";
+  String error = "";
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +60,13 @@ class _SignInState extends State<SignIn> {
             SizedBox(height:20.0),
             RaisedButton(
               onPressed: () async {
-
-                  print(email);
-                  print(password);
-
+                if(_formKey.currentState.validate()){
+                  dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                  if(result == null)
+                  {
+                    setState(() => error = "could not sign in with those credentials");
+                  }
+                }
               },
               color: Colors.pink[400],
               child: Text(
